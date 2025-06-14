@@ -15,7 +15,7 @@ public class HabitacionServicioLmpl implements HabitacionServicio{
     private HabitacionRepositorio repositorio;
 
     @Override
-    public List<Habitacion> listaHabitaciones() {
+    public List<Habitacion> listarHabitaciones() {
         return repositorio.findAll();
     }
 
@@ -25,7 +25,7 @@ public class HabitacionServicioLmpl implements HabitacionServicio{
     }
 
     @Override
-    public Habitacion update(Long id, Habitacion habitacion) {
+    public Habitacion actualizarHabitacion(Long id, Habitacion habitacion) {
         Habitacion habitacionModificada = repositorio.findById(id).get();
 
         habitacionModificada.setTipoHabitacion(habitacion.getTipoHabitacion());
@@ -36,13 +36,13 @@ public class HabitacionServicioLmpl implements HabitacionServicio{
     }
 
     @Override
-    public boolean eliminar(Long id) {
+    public boolean eliminarHabitacion(Long id) {
         boolean flag = false;
 
-        Optional<Habitacion> habitacionEncontrada = repositorio.findById(id);
+        Optional<Habitacion> habitacionOptional = repositorio.findById(id);
 
-        if(habitacionEncontrada.isPresent()){
-            repositorio.delete(habitacionEncontrada.get());
+        if(habitacionOptional.isPresent()){
+            repositorio.delete(habitacionOptional.get());
             flag = true;
         }
 

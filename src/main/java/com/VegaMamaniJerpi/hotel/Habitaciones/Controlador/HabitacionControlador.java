@@ -17,8 +17,8 @@ public class HabitacionControlador {
     private HabitacionServicioLmpl servicio;
 
     @GetMapping
-    public List<Habitacion> listaHabitaciones() {
-        return servicio.listaHabitaciones();
+    public List<Habitacion> listarHabitaciones() {
+        return servicio.listarHabitaciones();
     }
 
     @PostMapping
@@ -28,13 +28,13 @@ public class HabitacionControlador {
     }
 
     @PatchMapping("/{id}")
-    public Habitacion update(@PathVariable Long id, @RequestBody Habitacion habitacion) {
-        return servicio.update(id, habitacion);
+    public Habitacion actualizarHabitacion(@PathVariable Long id, @RequestBody Habitacion habitacion) {
+        return servicio.actualizarHabitacion(id, habitacion);
     }
 
     @PatchMapping("/{id}")
-    public boolean eliminar(@PathVariable Long id){
-        return servicio.eliminar(id);
+    public boolean eliminarHabitacion(@PathVariable Long id){
+        return servicio.eliminarHabitacion(id);
     }
 
     /// TEXTO PARA MODIFICAR

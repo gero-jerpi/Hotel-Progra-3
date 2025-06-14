@@ -1,4 +1,4 @@
-package com.VegaMamaniJerpi.hotel.Clientes.Modelo;
+package com.VegaMamaniJerpi.hotel.Huesped.Modelo;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -10,14 +10,14 @@ import java.util.Date;
 import java.util.Objects;
 
 @Entity
-@Table (name = "clientes")
-public class Cliente {
+@Table (name = "huespeds")
+public class Huesped {
 
     /// Atributos
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idCliente;
+    private Long idHuesped;
 
     @NotBlank(message = "El DNI no puede estar vacío")
     @Size(min = 8, max = 8, message = "El DNI debe tener exactamente 9 digitos")
@@ -38,11 +38,11 @@ public class Cliente {
 
     /// Constructores
 
-    public Cliente(){
+    public Huesped(){
 
     }
 
-    public Cliente(String dni, String nombre, String apellido, Date fechaNacimiento) {
+    public Huesped(String dni, String nombre, String apellido, Date fechaNacimiento) {
         this.dni = dni;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -52,12 +52,13 @@ public class Cliente {
 
     /// Getters && Setters
 
-    public Long getIdCliente() {
-        return idCliente;
+
+    public Long getIdHuesped() {
+        return idHuesped;
     }
 
-    public void setIdCliente(Long idCliente) {
-        this.idCliente = idCliente;
+    public void setIdHuesped(Long idHuesped) {
+        this.idHuesped = idHuesped;
     }
 
     public @NotBlank(message = "El DNI no puede estar vacío") @Size(min = 8, max = 8, message = "El DNI debe tener exactamente 9 digitos") String getDni() {
@@ -97,19 +98,19 @@ public class Cliente {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Cliente cliente)) return false;
-        return Objects.equals(idCliente, cliente.idCliente);
+        if (!(o instanceof Huesped huesped)) return false;
+        return Objects.equals(idHuesped, huesped.idHuesped);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(idCliente);
+        return Objects.hashCode(idHuesped);
     }
 
     @Override
     public String toString() {
-        return "Cliente{" +
-                "idCliente=" + idCliente +
+        return "Huesped{" +
+                "idHuesped=" + idHuesped +
                 ", dni='" + dni + '\'' +
                 ", nombre='" + nombre + '\'' +
                 ", apellido='" + apellido + '\'' +

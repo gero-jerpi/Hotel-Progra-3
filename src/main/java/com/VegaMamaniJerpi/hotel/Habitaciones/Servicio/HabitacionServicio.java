@@ -6,8 +6,11 @@ import java.util.List;
 import java.util.Optional;
 
 public interface HabitacionServicio {
-    List<Habitacion> listaHabitaciones();
+    List<Habitacion> listarHabitaciones();
+
     Habitacion guardarHabitacion(Habitacion nuevaHabitacion);
-    Habitacion update(Long id, Habitacion habitacion);
-    boolean eliminar(Long id);
+
+    Habitacion actualizarHabitacion(Long id, Habitacion habitacion);
+
+    boolean eliminarHabitacion(Long id);
 }
