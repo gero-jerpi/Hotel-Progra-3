@@ -1,6 +1,10 @@
 package com.VegaMamaniJerpi.hotel.Habitaciones.Modelo;
 import com.VegaMamaniJerpi.hotel.Enums.TipoHabitacion;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 
 import java.util.Objects;
 
@@ -12,21 +16,25 @@ public class Habitacion {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     private Long idHabitacion;
 
+    @NotNull(message = "El tipo de habitación no puede ser nulo")
     private TipoHabitacion tipoHabitacion;
+
+    @Min(value = 1, message = "La habitación debe aceptar al menos 1 persona")
+    @Max(value = 10, message = "La habitación no puede aceptar más de 10 personas")
     private int cantidadPersonas;
+
+    @DecimalMin(value = "0.0", inclusive = false, message = "El precio debe ser mayor que 0")
     private double precioPorNoche;
 
-    /// Constructor
+    /// Constructores
 
     public Habitacion(){
 
     }
 
-    public Habitacion(long idHabitacion, TipoHabitacion tipoHabitacion, int cantidadPersonas, double precioPorNoche) {
-        this.idHabitacion = idHabitacion;
+    public Habitacion(TipoHabitacion tipoHabitacion, int cantidadPersonas, double precioPorNoche) {
         this.tipoHabitacion = tipoHabitacion;
         this.cantidadPersonas = cantidadPersonas;
         this.precioPorNoche = precioPorNoche;
@@ -35,36 +43,38 @@ public class Habitacion {
 
     /// Getters && Setters
 
-
-    public long getIdHabitacion() {
+    public Long getIdHabitacion() {
         return idHabitacion;
     }
 
-    public void setIdHabitacion(long idHabitacion) {
+    public void setIdHabitacion(Long idHabitacion) {
         this.idHabitacion = idHabitacion;
     }
 
-    public TipoHabitacion getTipoHabitacion() {
+    public @NotNull(message = "El tipo de habitación no puede ser nulo") TipoHabitacion getTipoHabitacion() {
         return tipoHabitacion;
     }
 
-    public void setTipoHabitacion(TipoHabitacion tipoHabitacion) {
+    public void setTipoHabitacion(@NotNull(message = "El tipo de habitación no puede ser nulo") TipoHabitacion tipoHabitacion) {
         this.tipoHabitacion = tipoHabitacion;
     }
 
+    @Min(value = 1, message = "La habitación debe aceptar al menos 1 persona")
+    @Max(value = 10, message = "La habitación no puede aceptar más de 10 personas")
     public int getCantidadPersonas() {
         return cantidadPersonas;
     }
 
-    public void setCantidadPersonas(int cantidadPersonas) {
+    public void setCantidadPersonas(@Min(value = 1, message = "La habitación debe aceptar al menos 1 persona") @Max(value = 10, message = "La habitación no puede aceptar más de 10 personas") int cantidadPersonas) {
         this.cantidadPersonas = cantidadPersonas;
     }
 
+    @DecimalMin(value = "0.0", inclusive = false, message = "El precio debe ser mayor que 0")
     public double getPrecioPorNoche() {
         return precioPorNoche;
     }
 
-    public void setPrecioPorNoche(double precioPorNoche) {
+    public void setPrecioPorNoche(@DecimalMin(value = "0.0", inclusive = false, message = "El precio debe ser mayor que 0") double precioPorNoche) {
         this.precioPorNoche = precioPorNoche;
     }
 
