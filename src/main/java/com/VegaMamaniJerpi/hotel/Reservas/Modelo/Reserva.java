@@ -2,12 +2,14 @@ package com.VegaMamaniJerpi.hotel.Reservas.Modelo;
 
 import com.VegaMamaniJerpi.hotel.Habitaciones.Modelo.Habitacion;
 import com.VegaMamaniJerpi.hotel.Huesped.Modelo.Huesped;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 
 import java.time.LocalDate;
 import java.util.Objects;
 
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
 @Table (name = "reservas")
 public class Reserva {
@@ -17,11 +19,11 @@ public class Reserva {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idReserva;
 
-    @ManyToOne (optional = false) ///la reserva siempre tine que tener una habitacion
+    @ManyToOne (optional = false, fetch = FetchType.EAGER) ///la reserva siempre tine que tener una habitacion
     @JoinColumn (name = "idHuesped", referencedColumnName = "idHuesped")
     private Huesped huesped;
 
-    @ManyToOne (optional = false) ///la reserva siempre tine que tener una habitacion
+    @ManyToOne (optional = false, fetch = FetchType.EAGER) ///la reserva siempre tine que tener una habitacion
     @JoinColumn (name = "idHabitacion", referencedColumnName = "idHabitacion")
     private Habitacion habitacion;
 

@@ -1,5 +1,6 @@
 package com.VegaMamaniJerpi.hotel.Habitaciones.Modelo;
 import com.VegaMamaniJerpi.hotel.Enums.TipoHabitacion;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Max;
@@ -8,6 +9,7 @@ import jakarta.validation.constraints.NotNull;
 
 import java.util.Objects;
 
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
 @Table (name = "habitaciones")
 public class Habitacion {

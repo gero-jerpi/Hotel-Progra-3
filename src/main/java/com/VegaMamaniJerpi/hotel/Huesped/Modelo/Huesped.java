@@ -1,5 +1,6 @@
 package com.VegaMamaniJerpi.hotel.Huesped.Modelo;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -9,6 +10,7 @@ import jakarta.validation.constraints.Size;
 import java.time.LocalDate;
 import java.util.Objects;
 
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
 @Table (name = "huespeds")
 public class Huesped {
