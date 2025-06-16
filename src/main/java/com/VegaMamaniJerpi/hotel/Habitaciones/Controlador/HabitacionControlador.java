@@ -1,7 +1,7 @@
 package com.VegaMamaniJerpi.hotel.Habitaciones.Controlador;
 
 import com.VegaMamaniJerpi.hotel.Habitaciones.Modelo.Habitacion;
-import com.VegaMamaniJerpi.hotel.Habitaciones.Servicio.HabitacionServicioLmpl;
+import com.VegaMamaniJerpi.hotel.Habitaciones.Servicio.HabitacionServicioImpl;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +14,7 @@ import java.util.List;
 public class HabitacionControlador {
 
     @Autowired
-    private HabitacionServicioLmpl servicio;
+    private HabitacionServicioImpl servicio;
 
     @GetMapping
     public List<Habitacion> listarHabitaciones() {
@@ -27,11 +27,13 @@ public class HabitacionControlador {
         return servicio.guardarHabitacion(nuevaHabitacion);
     }
 
+    ///  @PutMapping("/{id}")
     @PatchMapping("/{id}")
     public Habitacion actualizarHabitacion(@PathVariable Long id, @RequestBody Habitacion habitacion) {
         return servicio.actualizarHabitacion(id, habitacion);
     }
 
+    ////@DeleteMapping("/{id}")
     @PatchMapping("/{id}")
     public boolean eliminarHabitacion(@PathVariable Long id){
         return servicio.eliminarHabitacion(id);

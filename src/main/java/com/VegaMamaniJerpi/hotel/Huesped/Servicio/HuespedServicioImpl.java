@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class HuespedServicioLmpl implements HuespedServicio {
+public class HuespedServicioImpl implements HuespedServicio {
 
     @Autowired
     private HuespedRepositorio repositorio;

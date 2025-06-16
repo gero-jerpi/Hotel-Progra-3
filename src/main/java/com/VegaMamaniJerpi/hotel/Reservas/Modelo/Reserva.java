@@ -1,35 +1,115 @@
 package com.VegaMamaniJerpi.hotel.Reservas.Modelo;
 
+import com.VegaMamaniJerpi.hotel.Habitaciones.Modelo.Habitacion;
+import com.VegaMamaniJerpi.hotel.Huesped.Modelo.Huesped;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.util.Objects;
 
 @Entity
 @Table (name = "reservas")
 public class Reserva {
-
 
     /// Atributos
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idReserva;
 
-    @NotBlank(message = "El DNI no puede estar vacío")
-    @Size(min = 8, max = 8, message = "El DNI debe tener exactamente 9 digitos")
-    private String dniHuesped;
+    @ManyToOne (optional = false) ///la reserva siempre tine que tener una habitacion
+    @JoinColumn (name = "idHuesped", referencedColumnName = "idHuesped")
+    private Huesped huesped;
 
-    @NotNull(message = "Debe indicar la habitación")
-    private Long idHabitacion;
+    @ManyToOne (optional = false) ///la reserva siempre tine que tener una habitacion
+    @JoinColumn (name = "idHabitacion", referencedColumnName = "idHabitacion")
+    private Habitacion habitacion;
 
     @NotNull(message = "La fecha de entrada es obligatoria")
     @Future(message = "La fecha de entrada debe ser en el futuro")
-    private Date fechaEntrada;
+    private LocalDate fechaEntrada;
 
     @NotNull(message = "La fecha de salida es obligatoria")
     @Future(message = "La fecha de salida debe ser en el futuro")
-    private Date fechaSalida;
+    private LocalDate fechaSalida;
 
 
+    /// Constructores
 
+    public Reserva() {
+
+    }
+
+    public Reserva(Huesped huesped, Habitacion habitacion, LocalDate fechaEntrada, LocalDate fechaSalida) {
+        this.huesped = huesped;
+        this.habitacion = habitacion;
+        this.fechaEntrada = fechaEntrada;
+        this.fechaSalida = fechaSalida;
+    }
+
+    /// Getters && Setters
+
+
+    public Long getIdReserva() {
+        return idReserva;
+    }
+
+    public Huesped getHuesped() {
+        return huesped;
+    }
+
+    public void setHuesped(Huesped huesped) {
+        this.huesped = huesped;
+    }
+
+    public Habitacion getHabitacion() {
+        return habitacion;
+    }
+
+    public void setHabitacion(Habitacion habitacion) {
+        this.habitacion = habitacion;
+    }
+
+    public LocalDate getFechaEntrada() {
+        return fechaEntrada;
+    }
+
+    public void setFechaEntrada( LocalDate fechaEntrada) {
+        this.fechaEntrada = fechaEntrada;
+    }
+
+    public LocalDate getFechaSalida() {
+        return fechaSalida;
+    }
+
+    public void setFechaSalida( LocalDate fechaSalida) {
+        this.fechaSalida = fechaSalida;
+    }
+
+    /// Metodos
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Reserva reserva = (Reserva) o;
+        return Objects.equals(idReserva, reserva.idReserva);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(idReserva);
+    }
+
+
+    @Override
+    public String toString() {
+        return "Reserva{" +
+                "idReserva=" + idReserva +
+                ", huesped=" + huesped +
+                ", habitacion=" + habitacion +
+                ", fechaEntrada=" + fechaEntrada +
+                ", fechaSalida=" + fechaSalida +
+                '}';
+    }
 }
