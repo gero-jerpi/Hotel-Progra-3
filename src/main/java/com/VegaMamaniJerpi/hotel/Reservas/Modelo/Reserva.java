@@ -26,7 +26,7 @@ public class Reserva {
     private Habitacion habitacion;
 
     @NotNull(message = "La fecha de entrada es obligatoria")
-    @Future(message = "La fecha de entrada debe ser en el futuro")
+    @FutureOrPresent(message = "La fecha de entrada debe ser hoy o una fecha futura")
     private LocalDate fechaEntrada;
 
     @NotNull(message = "La fecha de salida es obligatoria")
