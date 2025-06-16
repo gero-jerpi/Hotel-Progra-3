@@ -28,14 +28,12 @@ public class HuespedControlador {
         return servicio.guardarHuesped(nuevoHuesped);
     }
 
-    ///  @PutMapping("/{id}")
-    @PatchMapping("/{id}")
+    @PutMapping("/{id}")
     public Huesped actualizarHuesped(@PathVariable Long id, @RequestBody Huesped huesped){
         return servicio.actualizarHuesped(id, huesped);
     }
 
-    ////@DeleteMapping("/{id}")
-    @PatchMapping("/{id}")
+    @DeleteMapping("/{id}")
     public boolean eliminarHuesped(@PathVariable Long id){
         return servicio.eliminarHuesped(id);
     }

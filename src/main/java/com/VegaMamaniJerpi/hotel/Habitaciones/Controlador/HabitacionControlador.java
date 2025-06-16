@@ -27,21 +27,19 @@ public class HabitacionControlador {
         return servicio.guardarHabitacion(nuevaHabitacion);
     }
 
-    ///  @PutMapping("/{id}")
-    @PatchMapping("/{id}")
+    @PutMapping("/{id}")
     public Habitacion actualizarHabitacion(@PathVariable Long id, @RequestBody Habitacion habitacion) {
         return servicio.actualizarHabitacion(id, habitacion);
     }
 
-    ////@DeleteMapping("/{id}")
-    @PatchMapping("/{id}")
+    @DeleteMapping("/{id}")
     public boolean eliminarHabitacion(@PathVariable Long id){
         return servicio.eliminarHabitacion(id);
     }
 
     /// TEXTO PARA MODIFICAR
     /*{
-        "tipoHabitacion": "SIMPLE",
+            "tipoHabitacion": "SIMPLE",
             "cantidadPersonas": 3,
             "precioPorNoche": 2000.00
     }

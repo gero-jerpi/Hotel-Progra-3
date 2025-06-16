@@ -20,7 +20,7 @@ public class Huesped {
     private Long idHuesped;
 
     @NotBlank(message = "El DNI no puede estar vacío")
-    @Size(min = 8, max = 8, message = "El DNI debe tener exactamente 9 digitos")
+    @Size(min = 8, max = 8, message = "El DNI debe tener exactamente 8 digitos")
     private String dni;
 
     @NotBlank(message = "El nombre es obligatorio")
