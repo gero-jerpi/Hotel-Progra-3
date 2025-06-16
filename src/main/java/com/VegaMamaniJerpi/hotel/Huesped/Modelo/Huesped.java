@@ -6,7 +6,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Size;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
@@ -33,7 +33,7 @@ public class Huesped {
 
     @NotNull(message = "La fecha de nacimiento es obligatoria")
     @Past(message = "La fecha de nacimiento debe ser en el pasado")
-    private Date fechaNacimiento;
+    private LocalDate fechaNacimiento;
 
 
     /// Constructores
@@ -42,7 +42,7 @@ public class Huesped {
 
     }
 
-    public Huesped(String dni, String nombre, String apellido, Date fechaNacimiento) {
+    public Huesped(String dni, String nombre, String apellido, LocalDate fechaNacimiento) {
         this.dni = dni;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -85,11 +85,11 @@ public class Huesped {
         this.apellido = apellido;
     }
 
-    public @NotNull(message = "La fecha de nacimiento es obligatoria") @Past(message = "La fecha de nacimiento debe ser en el pasado") Date getFechaNacimiento() {
+    public @NotNull(message = "La fecha de nacimiento es obligatoria") @Past(message = "La fecha de nacimiento debe ser en el pasado") LocalDate getFechaNacimiento() {
         return fechaNacimiento;
     }
 
-    public void setFechaNacimiento(@NotNull(message = "La fecha de nacimiento es obligatoria") @Past(message = "La fecha de nacimiento debe ser en el pasado") Date fechaNacimiento) {
+    public void setFechaNacimiento(@NotNull(message = "La fecha de nacimiento es obligatoria") @Past(message = "La fecha de nacimiento debe ser en el pasado") LocalDate fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
 
