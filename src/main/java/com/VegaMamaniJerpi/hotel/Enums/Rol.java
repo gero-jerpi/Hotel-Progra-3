@@ -1,6 +1,6 @@
 package com.VegaMamaniJerpi.hotel.Enums;
 
 public enum Rol {
-    ADMINISTRADOR,
-    RECEPCIONISTA
+    ROLE_ADMINISTRADOR,
+    ROLE_RECEPCIONISTA
 }
