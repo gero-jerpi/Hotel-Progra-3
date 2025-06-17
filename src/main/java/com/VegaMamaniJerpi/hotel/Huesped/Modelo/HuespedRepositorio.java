@@ -5,4 +5,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface HuespedRepositorio extends JpaRepository<Huesped, Long> {
+    boolean existsByDni(String dni);
 }

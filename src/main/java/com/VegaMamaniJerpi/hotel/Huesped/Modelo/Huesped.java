@@ -21,6 +21,7 @@ public class Huesped {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idHuesped;
 
+    @Column(unique = true, nullable = false)
     @NotBlank(message = "El DNI no puede estar vacío")
     @Size(min = 8, max = 8, message = "El DNI debe tener exactamente 8 digitos")
     private String dni;
