@@ -63,35 +63,35 @@ public class Huesped {
         this.idHuesped = idHuesped;
     }
 
-    public @NotBlank(message = "El DNI no puede estar vacío") @Size(min = 8, max = 8, message = "El DNI debe tener exactamente 9 digitos") String getDni() {
+    public String getDni() {
         return dni;
     }
 
-    public void setDni(@NotBlank(message = "El DNI no puede estar vacío") @Size(min = 8, max = 8, message = "El DNI debe tener exactamente 9 digitos") String dni) {
+    public void setDni( String dni) {
         this.dni = dni;
     }
 
-    public @NotBlank(message = "El nombre es obligatorio") @Size(max = 50, message = "El nombre no puede tener más de 50 caracteres") String getNombre() {
+    public String getNombre() {
         return nombre;
     }
 
-    public void setNombre(@NotBlank(message = "El nombre es obligatorio") @Size(max = 50, message = "El nombre no puede tener más de 50 caracteres") String nombre) {
+    public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
-    public @NotBlank(message = "El apellido es obligatorio") @Size(max = 50, message = "El apellido no puede tener más de 50 caracteres") String getApellido() {
+    public String getApellido() {
         return apellido;
     }
 
-    public void setApellido(@NotBlank(message = "El apellido es obligatorio") @Size(max = 50, message = "El apellido no puede tener más de 50 caracteres") String apellido) {
+    public void setApellido(String apellido) {
         this.apellido = apellido;
     }
 
-    public @NotNull(message = "La fecha de nacimiento es obligatoria") @Past(message = "La fecha de nacimiento debe ser en el pasado") LocalDate getFechaNacimiento() {
+    public LocalDate getFechaNacimiento() {
         return fechaNacimiento;
     }
 
-    public void setFechaNacimiento(@NotNull(message = "La fecha de nacimiento es obligatoria") @Past(message = "La fecha de nacimiento debe ser en el pasado") LocalDate fechaNacimiento) {
+    public void setFechaNacimiento(LocalDate fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
 

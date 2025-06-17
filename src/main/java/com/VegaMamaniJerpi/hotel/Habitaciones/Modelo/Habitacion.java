@@ -53,30 +53,27 @@ public class Habitacion {
         this.idHabitacion = idHabitacion;
     }
 
-    public @NotNull(message = "El tipo de habitación no puede ser nulo") TipoHabitacion getTipoHabitacion() {
+    public TipoHabitacion getTipoHabitacion() {
         return tipoHabitacion;
     }
 
-    public void setTipoHabitacion(@NotNull(message = "El tipo de habitación no puede ser nulo") TipoHabitacion tipoHabitacion) {
+    public void setTipoHabitacion(TipoHabitacion tipoHabitacion) {
         this.tipoHabitacion = tipoHabitacion;
     }
 
-    @Min(value = 1, message = "La habitación debe aceptar al menos 1 persona")
-    @Max(value = 10, message = "La habitación no puede aceptar más de 10 personas")
     public int getCantidadPersonas() {
         return cantidadPersonas;
     }
 
-    public void setCantidadPersonas(@Min(value = 1, message = "La habitación debe aceptar al menos 1 persona") @Max(value = 10, message = "La habitación no puede aceptar más de 10 personas") int cantidadPersonas) {
+    public void setCantidadPersonas(int cantidadPersonas) {
         this.cantidadPersonas = cantidadPersonas;
     }
 
-    @DecimalMin(value = "0.0", inclusive = false, message = "El precio debe ser mayor que 0")
     public double getPrecioPorNoche() {
         return precioPorNoche;
     }
 
-    public void setPrecioPorNoche(@DecimalMin(value = "0.0", inclusive = false, message = "El precio debe ser mayor que 0") double precioPorNoche) {
+    public void setPrecioPorNoche(double precioPorNoche) {
         this.precioPorNoche = precioPorNoche;
     }
 
