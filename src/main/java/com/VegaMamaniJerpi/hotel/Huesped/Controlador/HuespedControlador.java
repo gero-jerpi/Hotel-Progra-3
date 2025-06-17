@@ -1,6 +1,6 @@
 package com.VegaMamaniJerpi.hotel.Huesped.Controlador;
 
-import com.VegaMamaniJerpi.hotel.Excepciones.DNIyaCargado;
+import com.VegaMamaniJerpi.hotel.Excepciones.DNIyaCargadoException;
 import com.VegaMamaniJerpi.hotel.Huesped.Modelo.Huesped;
 import com.VegaMamaniJerpi.hotel.Huesped.Servicio.HuespedServicioImpl;
 import jakarta.transaction.Transactional;
@@ -25,7 +25,7 @@ public class HuespedControlador {
 
     @PostMapping
     @Transactional
-    public Huesped guardarHuesped(@RequestBody Huesped nuevoHuesped) throws DNIyaCargado {
+    public Huesped guardarHuesped(@RequestBody Huesped nuevoHuesped) throws DNIyaCargadoException {
         return servicio.guardarHuesped(nuevoHuesped);
     }
 

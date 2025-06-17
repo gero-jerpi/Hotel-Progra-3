@@ -1,6 +1,7 @@
 package com.VegaMamaniJerpi.hotel.Usuarios.Servicio;
 
 import com.VegaMamaniJerpi.hotel.Enums.Rol;
+import com.VegaMamaniJerpi.hotel.Excepciones.UsuarioYaCargadoException;
 import com.VegaMamaniJerpi.hotel.Usuarios.Modelo.Usuario;
 import com.VegaMamaniJerpi.hotel.Usuarios.Modelo.UsuarioRepositorio;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -36,7 +37,11 @@ public class UsuarioServicioImpl implements UsuarioServicio, UserDetailsService 
     }
 
     @Override
-    public Usuario guardar(Usuario usuario) {
+    public Usuario guardar(Usuario usuario) throws UsuarioYaCargadoException{
+        if(repositorio.existsByNombre(usuario.getNombre())){
+            throw new UsuarioYaCargadoException("El username ingresado ya está siendo utilizado");
+        }
+
         usuario.setContrasenia(passwordEncoder.encode(usuario.getContrasenia()));
 
         // Asignar rol según la cantidad de usuarios en la base

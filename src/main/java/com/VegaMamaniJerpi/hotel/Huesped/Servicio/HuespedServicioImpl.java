@@ -1,6 +1,6 @@
 package com.VegaMamaniJerpi.hotel.Huesped.Servicio;
 
-import com.VegaMamaniJerpi.hotel.Excepciones.DNIyaCargado;
+import com.VegaMamaniJerpi.hotel.Excepciones.DNIyaCargadoException;
 import com.VegaMamaniJerpi.hotel.Huesped.Modelo.Huesped;
 import com.VegaMamaniJerpi.hotel.Huesped.Modelo.HuespedRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,10 +22,10 @@ public class HuespedServicioImpl implements HuespedServicio {
     }
 
     @Override
-    public Huesped guardarHuesped(Huesped nuevoHuesped) throws DNIyaCargado {
+    public Huesped guardarHuesped(Huesped nuevoHuesped) throws DNIyaCargadoException {
 
         if(repositorio.existsByDni(nuevoHuesped.getDni())){
-            throw new DNIyaCargado("Ya existe un huesped con el mismo DNI");
+            throw new DNIyaCargadoException("Ya existe un huesped con el mismo DNI");
         }
         return repositorio.save(nuevoHuesped);
     }

@@ -1,6 +1,6 @@
 package com.VegaMamaniJerpi.hotel.Facturas.Servicio;
 
-import com.VegaMamaniJerpi.hotel.Excepciones.FacturaExistente;
+import com.VegaMamaniJerpi.hotel.Excepciones.FacturaExistenteException;
 import com.VegaMamaniJerpi.hotel.Excepciones.FechaInvalidaException;
 import com.VegaMamaniJerpi.hotel.Excepciones.IdNoEncontradoException;
 import com.VegaMamaniJerpi.hotel.Facturas.Modelo.Factura;
@@ -29,7 +29,7 @@ public class FacturaServicioImpl implements FacturaServicio {
     }
 
     @Override
-    public Factura guardarFactura(Factura nuevaFactura) throws FacturaExistente {
+    public Factura guardarFactura(Factura nuevaFactura) throws FacturaExistenteException {
         if (nuevaFactura.getReserva() != null) {
             // Buscar la reserva completa por id para cargar habitación y fechas
             Reserva reservaCompleta = reservaRepositorio.findById(nuevaFactura.getReserva().getIdReserva())
@@ -40,7 +40,7 @@ public class FacturaServicioImpl implements FacturaServicio {
 
         Optional<Factura> existente = repositorio.findByReserva_IdReserva(nuevaFactura.getReserva().getIdReserva());
         if (existente.isPresent()) {
-            throw new FacturaExistente("Esa reserva ya tiene una factura asociada.");
+            throw new FacturaExistenteException("Esa reserva ya tiene una factura asociada.");
         }
 
         nuevaFactura.calcularPrecio();
@@ -49,7 +49,7 @@ public class FacturaServicioImpl implements FacturaServicio {
     }
 
     @Override
-    public Factura actualizarFactura(Long id, Factura factura) throws IdNoEncontradoException , FechaInvalidaException, FacturaExistente {
+    public Factura actualizarFactura(Long id, Factura factura) throws IdNoEncontradoException , FechaInvalidaException, FacturaExistenteException {
 
 
         if (factura.getFecha().isAfter(LocalDate.now())) {
@@ -61,7 +61,7 @@ public class FacturaServicioImpl implements FacturaServicio {
         if (factura.getReserva() != null && !factura.getReserva().getIdReserva().equals(facturaModificada.getReserva().getIdReserva())) {
             Optional<Factura> existente = repositorio.findByReserva_IdReserva(factura.getReserva().getIdReserva());
             if (existente.isPresent()) {
-                throw new FacturaExistente("La nueva reserva ya tiene una factura asociada.");
+                throw new FacturaExistenteException("La nueva reserva ya tiene una factura asociada.");
             }
         }
 

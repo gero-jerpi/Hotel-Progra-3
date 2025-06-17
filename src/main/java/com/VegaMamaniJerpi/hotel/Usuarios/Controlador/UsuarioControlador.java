@@ -1,5 +1,6 @@
 package com.VegaMamaniJerpi.hotel.Usuarios.Controlador;
 
+import com.VegaMamaniJerpi.hotel.Excepciones.UsuarioYaCargadoException;
 import com.VegaMamaniJerpi.hotel.Usuarios.Modelo.Usuario;
 import com.VegaMamaniJerpi.hotel.Usuarios.Servicio.UsuarioServicioImpl;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +18,7 @@ public class UsuarioControlador {
     }
 
     @PostMapping
-    public Usuario guardar(@RequestBody Usuario usuario) {
+    public Usuario guardar(@RequestBody Usuario usuario) throws UsuarioYaCargadoException {
         return servicio.guardar(usuario);
     }
 
