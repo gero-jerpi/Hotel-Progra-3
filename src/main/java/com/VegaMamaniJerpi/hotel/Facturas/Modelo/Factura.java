@@ -25,8 +25,8 @@ public class Factura {
     @PastOrPresent(message = "La fecha debe ser hoy o una fecha pasada")
     private LocalDate fecha;
 
-    @ManyToOne (optional = false, fetch = FetchType.EAGER) ///la factura siempre tine que tener una reserva
-    @JoinColumn (name = "idReserva", referencedColumnName = "idReserva")
+    @OneToOne (optional = false, fetch = FetchType.EAGER) ///la factura siempre tine que tener una reserva
+    @JoinColumn (name = "idReserva", unique = true) ///una reserva tenga una sola factura
     private Reserva reserva;
 
 

@@ -68,7 +68,6 @@ public class ReservaServicioImpl implements ReservaServicio  {
 
     @Override
     public boolean eliminarReserva(Long id) throws IdNoEncontradoException{
-
         Reserva reserva = repositorio.findById(id).orElseThrow(()-> new IdNoEncontradoException("Id no encontrado"));
         repositorio.delete(reserva);
         return true;
