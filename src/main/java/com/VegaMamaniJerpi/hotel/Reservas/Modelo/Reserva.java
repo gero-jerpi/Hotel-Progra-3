@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.Objects;
 
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
@@ -114,4 +115,13 @@ public class Reserva {
                 ", fechaSalida=" + fechaSalida +
                 '}';
     }
+
+    public long getCantidadDeDias() {
+        if (fechaEntrada != null && fechaSalida != null) {
+            return ChronoUnit.DAYS.between(fechaEntrada, fechaSalida);
+        }
+        return 0;
+    }
+
+
 }
