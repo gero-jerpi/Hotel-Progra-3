@@ -16,13 +16,11 @@ public class UsuarioControlador {
         this.servicio = servicio;
     }
 
-    // Registro
     @PostMapping
     public Usuario guardar(@RequestBody Usuario usuario) {
         return servicio.guardar(usuario);
     }
 
-    // Solo con fines de prueba, NO incluir en producción // IMPORTANTE!!!!!!!!!!!!
     @GetMapping
     public List<Usuario> listarUsuarios() {
         return servicio.listarUsuarios();

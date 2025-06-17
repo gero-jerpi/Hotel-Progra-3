@@ -21,20 +21,20 @@ public class Factura {
     private Long idFactura;
 
     //no se puede realizar una factura en el futuro
-    @NotNull(message = "La fecha es obligatoria")
-    @PastOrPresent(message = "La fecha debe ser hoy o una fecha pasada")
-    private LocalDate fecha;
+    //@NotNull(message = "La fecha es obligatoria")
+    //@PastOrPresent(message = "La fecha debe ser hoy o una fecha pasada")
+    private LocalDate fecha =  LocalDate.now();;
 
     @OneToOne (optional = false, fetch = FetchType.EAGER) ///la factura siempre tine que tener una reserva
     @JoinColumn (name = "idReserva", unique = true) ///una reserva tenga una sola factura
     private Reserva reserva;
 
 
-    private double precioBase;
+    private double precioBase = 0;
 
-    private double precioAjuste;
+    private double precioAjuste = 0;
 
-    private double precioFinal;
+    private double precioFinal = 0;
 
     @NotNull(message = "el tipo de pago no puede ser nulo")
     private TipoDePago tipoDePago;
@@ -45,10 +45,9 @@ public class Factura {
     public Factura() {
     }
 
-    public Factura(LocalDate fecha, Reserva reserva, TipoDePago tipoDePago) {
-        this.fecha = fecha;
+    public Factura(Reserva reserva, TipoDePago tipoDePago) {
         this.reserva = reserva;
-        setTipoDePago(tipoDePago); ///este metodo calcula el precio final con ese tipo de pago
+        this.tipoDePago = tipoDePago;
     }
 
     /// Getters && setters
@@ -99,17 +98,27 @@ public class Factura {
     }
 
 
+    public void setPrecioBase(double precioBase) {
+        this.precioBase = precioBase;
+    }
+
+    public void setPrecioAjuste(double precioAjuste) {
+        this.precioAjuste = precioAjuste;
+    }
+
+    public void setPrecioFinal(double precioFinal) {
+        this.precioFinal = precioFinal;
+    }
+
     /// Metodos
 
-    private void calcularPrecio (){
+    public void calcularPrecio (){
         if (reserva != null && reserva.getHabitacion() != null && tipoDePago != null) {
             long cantDias= reserva.getCantidadDeDias();
 
-            this.precioBase= cantDias*reserva.getHabitacion().getPrecioPorNoche();
-
-            this.precioAjuste= tipoDePago.calcularAjuste(precioBase);
-
-            this.precioFinal= precioBase + precioAjuste;
+            setPrecioBase(cantDias*reserva.getHabitacion().getPrecioPorNoche());
+            setPrecioAjuste(tipoDePago.calcularAjuste(precioBase));
+            setPrecioFinal(precioBase + precioAjuste);
         }
     }
 

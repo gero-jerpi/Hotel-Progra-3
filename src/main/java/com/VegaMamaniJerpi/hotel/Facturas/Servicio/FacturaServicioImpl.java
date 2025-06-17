@@ -5,6 +5,8 @@ import com.VegaMamaniJerpi.hotel.Excepciones.FechaInvalidaException;
 import com.VegaMamaniJerpi.hotel.Excepciones.IdNoEncontradoException;
 import com.VegaMamaniJerpi.hotel.Facturas.Modelo.Factura;
 import com.VegaMamaniJerpi.hotel.Facturas.Modelo.FacturaRepositorio;
+import com.VegaMamaniJerpi.hotel.Reservas.Modelo.Reserva;
+import com.VegaMamaniJerpi.hotel.Reservas.Modelo.ReservaRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +20,9 @@ public class FacturaServicioImpl implements FacturaServicio {
     @Autowired
     private FacturaRepositorio repositorio;
 
+    @Autowired
+    private ReservaRepositorio reservaRepositorio;
+
     @Override
     public List<Factura> listarFacturas() {
         return repositorio.findAll();
@@ -26,11 +31,20 @@ public class FacturaServicioImpl implements FacturaServicio {
     @Override
     public Factura guardarFactura(Factura nuevaFactura) throws FacturaExistente {
         if (nuevaFactura.getReserva() != null) {
-            Optional<Factura> existente = repositorio.findByReserva_IdReserva(nuevaFactura.getReserva().getIdReserva());
-            if (existente.isPresent()) {
-                throw new FacturaExistente("Esa reserva ya tiene una factura asociada.");
-            }
+            // Buscar la reserva completa por id para cargar habitación y fechas
+            Reserva reservaCompleta = reservaRepositorio.findById(nuevaFactura.getReserva().getIdReserva())
+                    .orElseThrow(() -> new RuntimeException("Reserva no encontrada"));
+
+            nuevaFactura.setReserva(reservaCompleta);
         }
+
+        Optional<Factura> existente = repositorio.findByReserva_IdReserva(nuevaFactura.getReserva().getIdReserva());
+        if (existente.isPresent()) {
+            throw new FacturaExistente("Esa reserva ya tiene una factura asociada.");
+        }
+
+        nuevaFactura.calcularPrecio();
+
         return repositorio.save(nuevaFactura);
     }
 

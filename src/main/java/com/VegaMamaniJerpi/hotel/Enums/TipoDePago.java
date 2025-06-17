@@ -17,7 +17,7 @@ public enum TipoDePago {
         return porcentajeAjuste;
     }
 
-    // Met odo que calcula el total ajustado según el tipo de pago
+    // Metodo que calcula el total ajustado según el tipo de pago
     public double calcularAjuste(double precio) {
 
         return precio * (porcentajeAjuste / 100.0);  // Ajuste en base al porcentaje

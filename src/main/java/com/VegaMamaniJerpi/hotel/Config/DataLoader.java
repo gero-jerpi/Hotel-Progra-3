@@ -18,12 +18,9 @@ public class DataLoader implements CommandLineRunner {
         if (usuarioServicio.cantidadUsuarios() == 0) {
             Usuario admin = new Usuario();
             admin.setNombre("ADMIN");
-            admin.setContrasenia("ADMIN"); // o la clave que quieras
+            admin.setContrasenia("ADMIN");
             admin.setRol(Rol.ADMIN);
-            // Seteá otros campos necesarios del usuario
-            usuarioServicio.guardar(admin); // Esto debería asignar el rol admin automáticamente si usaste lo anterior
-
-            System.out.println("ADMIN CREADO");
+            usuarioServicio.guardar(admin);
         }
     }
 }
