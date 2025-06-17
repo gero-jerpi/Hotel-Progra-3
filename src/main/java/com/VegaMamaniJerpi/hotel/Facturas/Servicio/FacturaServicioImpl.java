@@ -6,11 +6,13 @@ import com.VegaMamaniJerpi.hotel.Excepciones.IdNoEncontradoException;
 import com.VegaMamaniJerpi.hotel.Facturas.Modelo.Factura;
 import com.VegaMamaniJerpi.hotel.Facturas.Modelo.FacturaRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class FacturaServicioImpl implements FacturaServicio {
 
     @Autowired
@@ -24,7 +26,7 @@ public class FacturaServicioImpl implements FacturaServicio {
     @Override
     public Factura guardarFactura(Factura nuevaFactura) throws FacturaExistente {
         if (nuevaFactura.getReserva() != null) {
-            Optional<Factura> existente = repositorio.findByReservaId(nuevaFactura.getReserva().getIdReserva());
+            Optional<Factura> existente = repositorio.findByReserva_IdReserva(nuevaFactura.getReserva().getIdReserva());
             if (existente.isPresent()) {
                 throw new FacturaExistente("Esa reserva ya tiene una factura asociada.");
             }
@@ -43,7 +45,7 @@ public class FacturaServicioImpl implements FacturaServicio {
         Factura facturaModificada= repositorio.findById(id).orElseThrow(()-> new IdNoEncontradoException("Id no encontrado"));
 
         if (factura.getReserva() != null && !factura.getReserva().getIdReserva().equals(facturaModificada.getReserva().getIdReserva())) {
-            Optional<Factura> existente = repositorio.findByReservaId(factura.getReserva().getIdReserva());
+            Optional<Factura> existente = repositorio.findByReserva_IdReserva(factura.getReserva().getIdReserva());
             if (existente.isPresent()) {
                 throw new FacturaExistente("La nueva reserva ya tiene una factura asociada.");
             }
