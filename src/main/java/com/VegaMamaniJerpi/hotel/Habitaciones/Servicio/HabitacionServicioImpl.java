@@ -37,15 +37,15 @@ public class HabitacionServicioImpl implements HabitacionServicio{
 
     @Override
     public boolean eliminarHabitacion(Long id) {
-        boolean flag = false;
+        List<Long> ids = List.of(id);
 
-        Optional<Habitacion> habitacionOptional = repositorio.findById(id);
-
-        if(habitacionOptional.isPresent()){
-            repositorio.delete(habitacionOptional.get());
-            flag = true;
-        }
-
-        return flag;
+        return ids.stream()
+                .map(repositorio::findById)
+                .filter(Optional::isPresent)
+                .map(Optional::get)
+                .peek(repositorio::delete)
+                .findAny()
+                .isPresent();
     }
+
 }
